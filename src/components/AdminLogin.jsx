@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,12 +16,11 @@ function AdminLogin() {
     try {
       const API_URL = import.meta.env.VITE_API_URL;
 
-      // Backend expects: username + password
       const response = await fetch(`${API_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username: email,   // <-- FIX: backend memakai username
+          username: username,   // <-- ini yang bener
           password: password
         })
       });
@@ -33,9 +32,8 @@ function AdminLogin() {
         localStorage.setItem('adminData', JSON.stringify(data.admin));
         navigate('/admin/dashboard');
       } else {
-        setError(data.message || 'Username atau password salah');
+        setError(data.message);
       }
-
     } catch (err) {
       setError('Terjadi kesalahan. Coba lagi.');
     } finally {
@@ -53,13 +51,13 @@ function AdminLogin() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Email</label>
+            <label className="block text-gray-700 font-medium mb-2">Username</label>
             <input
               type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="Masukkan email admin"
+              placeholder="Masukkan username"
               required
             />
           </div>
