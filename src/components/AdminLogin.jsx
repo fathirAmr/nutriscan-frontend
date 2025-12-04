@@ -14,13 +14,16 @@ function AdminLogin() {
     setError('');
 
     try {
-	const API_URL = import.meta.env.VITE_API_URL;
-	const response = await fetch(`${API_URL}/api/admin/login`, {
+      const API_URL = import.meta.env.VITE_API_URL;
+
+      // Backend expects: username + password
+      const response = await fetch(`${API_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-			email: username,
-			password })
+        body: JSON.stringify({
+          username: email,   // <-- FIX: backend memakai username
+          password: password
+        })
       });
 
       const data = await response.json();
@@ -30,8 +33,9 @@ function AdminLogin() {
         localStorage.setItem('adminData', JSON.stringify(data.admin));
         navigate('/admin/dashboard');
       } else {
-        setError(data.message);
+        setError(data.message || 'Username atau password salah');
       }
+
     } catch (err) {
       setError('Terjadi kesalahan. Coba lagi.');
     } finally {
@@ -55,7 +59,7 @@ function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              placeholder="Masukkan username"
+              placeholder="Masukkan email admin"
               required
             />
           </div>
@@ -92,7 +96,7 @@ function AdminLogin() {
             onClick={() => navigate('/')}
             className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
           >
-             Kembali
+            Kembali
           </button>
         </div>
       </div>
@@ -101,6 +105,3 @@ function AdminLogin() {
 }
 
 export default AdminLogin;
-
-
-
