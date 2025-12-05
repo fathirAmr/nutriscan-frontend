@@ -79,4 +79,14 @@ export const api = {
   },
 
   // Clear all history
-  clearHis
+  clearHistory: async () => {
+    try {
+      const response = await fetch(`${API_URL}/api/history/clear`, {
+        method: 'DELETE'
+      });
+      return await response.json();
+    } catch (error) {
+      return { success: false, message: error.message };
+    }
+  }
+};
