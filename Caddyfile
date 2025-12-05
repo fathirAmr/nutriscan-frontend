@@ -5,6 +5,11 @@
 :80 {
     root * /app/dist
     file_server
-    try_files {path} /index.html
-}
 
+    try_files {path} /index.html
+
+    # Tambahkan di dalam block ini
+    route /api-test {
+        respond "API URL: {env.VITE_API_URL}"
+    }
+}
