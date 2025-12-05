@@ -199,13 +199,14 @@ function AdminDashboard() {
     }
   };
 
-  return (
-    /* JSX SAME AS BEFORE — NO CHANGE */
-    <div className="min-h-screen bg-gray-100">
-      {/* your full JSX unchanged */}
-    </div>
-  );
+return (
+  <div className="min-h-screen bg-gray-100 p-10 text-3xl font-bold text-center">
+    ADMIN DASHBOARD WORKING 🎉
+  </div>
+);
+
 }
 
 export default AdminDashboard;
+
 
