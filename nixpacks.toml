@@ -1,6 +1,6 @@
 # Force rebuild
 [phases.setup]
-nixPkgs = ["nodejs_22"]
+nixPkgs = ["nodejs_23"]
 
 [phases.build]
 cmds = ["npm run build"]
