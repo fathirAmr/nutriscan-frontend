@@ -1,3 +1,4 @@
+# Force rebuild
 [phases.setup]
 nixPkgs = ["nodejs_22"]
 
