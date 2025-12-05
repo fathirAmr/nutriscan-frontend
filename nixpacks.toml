@@ -6,5 +6,5 @@ nixPkgs = ["nodejs_23"]
 cmds = ["npm run build"]
 
 [start]
-cmd = "caddy run --config /Caddyfile --adapter caddyfile"
+cmd = "caddy run --config ./Caddyfile --adapter caddyfile"
 
