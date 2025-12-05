@@ -1,15 +1,16 @@
 {
-    auto_https off
+  auto_https off
 }
 
 :80 {
     root * /app/dist
     file_server
 
-    try_files {path} /index.html
-
-    # Tambahkan di dalam block ini
-    route /api-test {
-        respond "API URL: {env.VITE_API_URL}"
+    # TEMPORARY: expose build output
+    route /debug-dist/* {
+        root * /app
+        file_server browse
     }
+
+    try_files {path} /index.html
 }
